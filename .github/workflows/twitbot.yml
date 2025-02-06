@@ -2,7 +2,7 @@ name: Run Twitter Bot Daily
 
 on:
   schedule:
-    - cron: '* * * * *' # Runs at 8:30 AM IST (adjust as needed)
+    - cron: '* */12 * * *' # Runs at 8:30 AM IST (adjust as needed)
 
 jobs:
   run-bot:
