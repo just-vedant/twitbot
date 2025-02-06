@@ -1,0 +1,38 @@
+name: Run Twitter Bot Daily
+
+on:
+  schedule:
+    - cron: '* * * * *' # Runs at 8:30 AM IST (adjust as needed)
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18' # Use your preferred Node.js version
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Script
+        env:
+          GOOGLE_AI_API_KEY: ${{ secrets.GOOGLE_AI_API_KEY }}
+          NEWS_API: ${{ secrets.NEWS_API }}
+          ClientID: ${{ secrets.ClientID }}
+          ClientSecret: ${{ secrets.ClientSecret }}
+          AppKey: ${{ secrets.AppKey }}
+          AppSecret: ${{ secrets.AppSecret }}
+          AccessToken: ${{ secrets.AccessToken }}
+          AccessSecret: ${{ secrets.AccessSecret }}
+        run: node index.js
+
+      # Add this if you want to retry on failure
+      - name: Retry Tweet Post if Needed (Optional)
+        if: ${{ failure() }}
+        run: node index.js

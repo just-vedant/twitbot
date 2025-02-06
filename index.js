@@ -28,27 +28,25 @@ const to = formatDate(today);
 let articles = [];
 // To query sources
 // All options are optional
-const post = () => {
-  newsapi.v2.everything({
-    domains: 'bbc.co.uk, techcrunch.com,timesofindia.indiatimes.com,bombaytimes.com',
-    language: 'en',
-    from:from,
-    to:to,
-    pageSize:8,
-    page:2
-  }).then(response => {
-    articles = response.articles;
-    imageurl = articles.map(articles => articles.url)
-    const prompt = `I'm making a twitter bot to give a summary of todays news in detail, I have provided the Articles along with the content of the article. Format it for a Twitter post.The Artices are as follows ${articles.map(article => `${article.title} - ${article.description} - ${article.content}`).join(' , ')}. Make sure the tweet is within 120 characters as beyond this the tweet cannot be posted.`;
-  
-    generateContent(prompt).then(post => {
-      console.log(post);
-      postTweet(post);
-    }).catch(error => {
-      console.error("Error generating content:", error);
-    });
+newsapi.v2.everything({
+  domains: 'bbc.co.uk, techcrunch.com,timesofindia.indiatimes.com,bombaytimes.com',
+  language: 'en',
+  from:from,
+  to:to,
+  pageSize:8,
+  page:2
+}).then(response => {
+  articles = response.articles;
+  imageurl = articles.map(articles => articles.url)
+  const prompt = `I'm making a twitter bot to give a summary of todays news in detail, I have provided the Articles along with the content of the article. Format it for a Twitter post.The Artices are as follows ${articles.map(article => `${article.title} - ${article.description} - ${article.content}`).join(' , ')}. Make sure the tweet is within 120 characters as beyond this the tweet cannot be posted.`;
+
+  generateContent(prompt).then(post => {
+    console.log(post);
+    postTweet(post);
+  }).catch(error => {
+    console.error("Error generating content:", error);
   });
-}
+});
 
 
 
@@ -82,11 +80,3 @@ async function postTweet(text) {
   }
 }
 
-
-cron.schedule('30 8 * * *', () => {
-  console.log(`Executing task at ${new Date()}`);
-  post();
-}, {
-  scheduled: true,
-  timezone: 'Asia/Kolkata' // Set to your desired timezone
-});
