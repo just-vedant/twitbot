@@ -88,5 +88,5 @@ cron.schedule('30 8 * * *', () => {
   post();
 }, {
   scheduled: true,
-  timezone: 'Etc/UTC' // Set to your desired timezone
+  timezone: 'Asia/Kolkata' // Set to your desired timezone
 });
