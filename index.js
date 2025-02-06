@@ -30,7 +30,7 @@ let articles = [];
 // All options are optional
 const post = () => {
   newsapi.v2.everything({
-    domains: 'bbc.co.uk, techcrunch.com, https://timesofindia.indiatimes.com/defaultinterstitial.cms?b=/,https://www.bombaytimes.com/',
+    domains: 'bbc.co.uk, techcrunch.com,timesofindia.indiatimes.com,bombaytimes.com',
     language: 'en',
     from:from,
     to:to,
