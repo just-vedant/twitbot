@@ -38,7 +38,7 @@ newsapi.v2.everything({
 }).then(response => {
   articles = response.articles;
   imageurl = articles.map(articles => articles.url)
-  const prompt = `I'm making a twitter bot to give a summary of todays news in detail, I have provided the Articles along with the content of the article. Format it for a Twitter post.The Artices are as follows ${articles.map(article => `${article.title} - ${article.description} - ${article.content}`).join(' , ')}. Make sure the tweet is within 120 characters as beyond this the tweet cannot be posted.`;
+  const prompt = `I'm making a twitter bot to give a summary of todays news in detail, I have provided the Articles along with the content of the article. Format it for a Twitter post.The Artices are as follows ${articles.map(article => `${article.title} - ${article.description} - ${article.content}`).join(' , ')}. Make sure the tweet is within 120 characters as beyond this the tweet cannot be posted.Do not give anything extra I need the response to be less than the specified characters.`;
 
   generateContent(prompt).then(post => {
     console.log(post);
