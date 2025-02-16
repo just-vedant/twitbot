@@ -103,7 +103,7 @@ This project is licensed under the MIT License
 ---
 
 ## Author  
-- **Vedant Sakpal** - ([https://github.com/your-username](https://github.com/just-vedant) 
+- **Vedant Sakpal** - ([Link](https://github.com/just-vedant)) 
 
 ---
 
