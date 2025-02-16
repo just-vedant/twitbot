@@ -3,8 +3,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const { TwitterApi } = require('twitter-api-v2')
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-const cron = require('node-cron')
-
+const keep_alive = require('./keep_alive')
 const NewsAPI = require('newsapi');
 const newsapi = new NewsAPI(process.env.NEWS_API);
 
