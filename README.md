@@ -98,18 +98,14 @@ cron.schedule('0 6 * * *', () => {
 ---
 
 ## License  
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.  
+This project is licensed under the MIT License 
 
 ---
 
 ## Author  
-- **Your Name** - [Your GitHub Profile](https://github.com/your-username)  
+- **Vedant Sakpal** - [Your GitHub Profile]([https://github.com/your-username](https://github.com/just-vedant))  
 
 ---
 
 ## Contributing  
 Pull requests are welcome. For significant changes, please open an issue first to discuss what you would like to change.  
-
----
-
-Feel free to customize the placeholders (like `your-username`, `your_google_ai_api_key`, etc.) with your specific details. If you need any modifications, let me know!
