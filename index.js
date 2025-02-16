@@ -2,13 +2,14 @@ require('dotenv').config();
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const { TwitterApi } = require('twitter-api-v2')
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY);
+const cron = require('node-cron');
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 const keep_alive = require('./keep_alive')
 const NewsAPI = require('newsapi');
 const newsapi = new NewsAPI(process.env.NEWS_API);
 
 const today = new Date();
-
+var postwit;
 // Get yesterday's date by subtracting 1 day from today
 const yesterday = new Date(today);
 yesterday.setDate(today.getDate() - 2);
@@ -40,8 +41,8 @@ newsapi.v2.everything({
   const prompt = `I'm making a twitter bot to give a summary of todays news in detail, I have provided the Articles along with the content of the article. Format it for a Twitter post.The Artices are as follows ${articles.map(article => `${article.title} - ${article.description} - ${article.content}`).join(' , ')}. Make sure the tweet is within 120 characters as beyond this the tweet cannot be posted.Do not give any options extra I need the response to be less than the specified characters.Provide the tweet directly as it is directly going to be used.`;
 
   generateContent(prompt).then(post => {
+    postwit = post
     console.log(post);
-    postTweet(post);
   }).catch(error => {
     console.error("Error generating content:", error);
   });
@@ -79,3 +80,7 @@ async function postTweet(text) {
   }
 }
 
+cron.schedule('0 6 * * *', () => { // 6 AM daily UTC
+   
+  postTweet(postwit);// Your existing tweet logic
+});
